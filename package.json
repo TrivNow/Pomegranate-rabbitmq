@@ -1,0 +1,28 @@
+{
+  "name": "pomegranate-rabbitmq",
+  "version": "0.0.0",
+  "description": "Provides Rabbit.js to Pomegranate.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TrivNow/Pomegranate-rabbitmq.git"
+  },
+  "keywords": [
+    "Pomegranate",
+    "Plugin",
+    "RabbitMQ",
+    "amqp"
+  ],
+  "author": "Jim <monstertke@paperelectron.com> (http://paperelectron.com/)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/TrivNow/Pomegranate-rabbitmq/issues"
+  },
+  "homepage": "https://github.com/TrivNow/Pomegranate-rabbitmq#readme",
+  "dependencies": {
+    "rabbit.js": "^0.4.4"
+  }
+}
