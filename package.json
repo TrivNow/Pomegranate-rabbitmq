@@ -1,6 +1,6 @@
 {
   "name": "pomegranate-rabbitmq",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Provides Rabbit.js to Pomegranate.",
   "main": "index.js",
   "scripts": {
