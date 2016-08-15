@@ -23,6 +23,6 @@
   },
   "homepage": "https://github.com/TrivNow/Pomegranate-rabbitmq#readme",
   "dependencies": {
-    "rabbit.js": "^0.4.4"
+    "amqplib": "^0.4.2"
   }
 }

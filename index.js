@@ -5,47 +5,50 @@
  * @license MIT {@link http://opensource.org/licenses/MIT}
  */
 
+'use strict';
+var rabbit = require('amqplib')
 /**
  *
- * @module index
+ * @module pomegranate-rabbitmq
  */
 
-"use strict";
-
-var rabbit = require('rabbit.js');
-
 exports.options = {
-  url: 'amqp://localhost'
+  url: 'amqp://localhost',
+  socketOptions: {}
 }
 
 exports.metadata = {
   name: 'RabbitMQ',
   type: 'service',
-  param: 'Rabbit'
+  param: 'RabbitConnection'
 }
 
 exports.plugin = {
   load: function(inject, loaded) {
     var self = this
-    var rmq = rabbit.createContext(this.options.url)
-    this.rmq = rmq
-    rmq.on('ready', function(){
-      loaded(null, rmq)
-    })
+    rabbit.connect(this.options.url)
+      .then(function(connection){
+        self.connection = connection
+        loaded(null, connection)
+      })
+      .catch(function(err) {
+        loaded(err)
+      })
 
-    rmq.on('error', function(err){
-      self.lateError(err)
-    })
   },
   start: function(done) {
     done()
   },
   stop: function(done) {
-    if(!this.rmq) return done()
+    if(this.connection){
+      this.connection.close()
+        .then(function() {
+          done()
+        })
+        .catch(function(err) {
+          done(err)
+        })
+    }
 
-    this.rmq.on('close', function(){
-      done()
-    })
-    this.rmq.close()
   }
 }
