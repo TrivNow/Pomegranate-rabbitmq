@@ -18,35 +18,28 @@ exports.options = {
 }
 
 exports.metadata = {
+  frameworkVersion: 6,
   name: 'RabbitMQ',
   type: 'service',
   param: 'RabbitConnection'
 }
 
 exports.plugin = {
-  load: function(inject, loaded) {
-    var self = this
-    rabbit.connect(this.options.url)
+  load: function(Options, PluginContext) {
+    return rabbit.connect(Options.url)
       .then(function(connection){
-        self.connection = connection
-        loaded(null, connection)
-      })
-      .catch(function(err) {
-        loaded(err)
+        return connection
       })
 
   },
-  start: function(done) {
-    done()
+  start: function() {
   },
-  stop: function(done) {
-    if(this.connection){
-      this.connection.close()
+  stop: function(RabbitConnection, Logger) {
+    if(RabbitConnection){
+      return RabbitConnection.close()
         .then(function() {
-          done()
-        })
-        .catch(function(err) {
-          done(err)
+          Logger.log('Connection closed.')
+          return true
         })
     }
 

@@ -24,5 +24,8 @@
   "homepage": "https://github.com/TrivNow/Pomegranate-rabbitmq#readme",
   "dependencies": {
     "amqplib": "^0.4.2"
+  },
+  "peerDependencies": {
+    "pomegranate": "6"
   }
 }
